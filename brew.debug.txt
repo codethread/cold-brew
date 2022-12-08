@@ -1,0 +1,42 @@
+23:49:39.026 INFO  started with args ["collections"] 
+23:49:39.028 WARN  no cold-brew config file  
+23:49:47.175 INFO  started with args ["collections"] 
+23:49:47.177 INFO  config directory/Users/codethread/.config/cold-brew 
+23:49:47.177 INFO  /Users/codethread/.config/cold-brew.json 
+23:49:47.177 WARN  no cold-brew config file  
+23:50:38.546 INFO  started with args ["collections"] 
+23:50:38.548 WARN  no cold-brew config file  
+23:50:47.874 INFO  started with args ["collections"] 
+23:50:47.876 WARN  config directory/Users/codethread/.config/cold-brew 
+23:50:47.876 WARN  /Users/codethread/.config/cold-brew.json 
+23:50:47.876 WARN  no cold-brew config file  
+23:51:08.400 INFO  started with args ["collections"] 
+23:51:08.402 WARN  config directory /Users/codethread/.config/cold-brew 
+23:51:08.402 WARN  /Users/codethread/.config/cold-brew.json 
+23:51:08.402 WARN  no cold-brew config file  
+23:52:06.822 INFO  started with args ["collections"] 
+23:52:06.824 WARN  config directory /Users/codethread/.config/cold-brew 
+23:52:06.824 WARN  /Users/codethread/.config/cold-brew/.json 
+23:52:06.825 WARN  no cold-brew config file  
+23:53:51.226 INFO  started with args ["collections"] 
+23:53:51.228 WARN  config directory /Users/codethread/.config/cold-brew 
+23:53:51.228 WARN  /Users/codethread/.config/cold-brew/COLD_BREW_PROFILE.json 
+23:53:51.229 WARN  no cold-brew config file COLD_BREW_PROFILE 
+23:54:21.600 INFO  started with args ["collections"] 
+23:54:21.602 WARN  config directory /Users/codethread/.config/cold-brew 
+23:54:21.602 WARN  /Users/codethread/.config/cold-brew/COLD_BREW_PROFILE.json 
+23:54:21.602 WARN  no cold-brew config file COLD_BREW_PROFILE 
+23:55:06.184 INFO  -------------------------------------------- 
+23:55:06.184 INFO  started with args ["collections"] 
+23:55:06.184 WARN  config directory /Users/codethread/.config/cold-brew 
+23:55:06.184 WARN  /Users/codethread/.config/cold-brew/COLD_BREW_PROFILE.json 
+23:55:06.184 WARN  no cold-brew config file COLD_BREW_PROFILE 
+16:27:08.602 INFO  -------------------------------------------- 
+16:27:08.602 INFO  started with args["collections"] 
+16:27:21.027 INFO  -------------------------------------------- 
+16:27:21.027 INFO  started with args["collections"] 
+16:30:07.923 INFO  -------------------------------------------- 
+16:30:07.923 INFO  started with args["collections"] 
+16:57:48.534 INFO  -------------------------------------------- 
+16:57:48.534 INFO  started with args["collections"] 
+16:57:48.537 ERROR righthi 

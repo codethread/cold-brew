@@ -1,7 +1,11 @@
 {
 	"extends": "@tsconfig/node-lts-strictest/tsconfig.json",
 	"compilerOptions": {
-		"outDir": "./dist"
+		"outDir": "./dist",
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"importsNotUsedAsValues": "preserve",
+		"allowUnusedLabels": true
 	},
 	"include": ["src/**/*"]
 }

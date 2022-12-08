@@ -5,23 +5,55 @@
 // 4. handle input mid command
 // 5. exit codes
 // 6. add custom steps
-import { spawn } from "child_process";
-import { writeFile } from "fs";
-import { join } from "path";
+// 8. disable auto update things?? on update command, run volta-migrate
+import { SystemClock } from 'clock-ts';
+import * as TE from 'fp-ts/TaskEither';
+import * as RIO from 'fp-ts/ReaderIO';
+import * as IO from 'fp-ts/IO';
+import type * as E from 'fp-ts/Either';
+import * as T from 'fp-ts/Task';
+import { pipe } from 'fp-ts/function';
+import * as C from 'fp-ts/Console';
+import * as L from 'logger-fp-ts';
 
-const brew = "/usr/local/bin/brew";
-const logPath = join(__dirname, "../log.txt");
-export default function greet(args: string[]) {
-    const proc = spawn(brew, args, { shell: "/bin/zsh", stdio: "inherit" });
+const env: L.LoggerEnv = {
+	clock: SystemClock,
+	logger: pipe(C.log, L.withShow(L.ShowLogEntry)),
+};
 
-    // proc.stdout.on("data", (b) => {
-    //   writeFile(logPath, b.toString(), (e) => {
-    //     console.error(e);
-    //   });
-    // });
-    // process.stdin.pipe(proc.stdin);
-    // proc.stdout.pipe(process.stdout);
-    // proc.stderr.pipe(process.stderr);
+type RawArgs = readonly string[];
 
-      proc.on("exit", process.exit);
+function shimBrewOrPassthrough(args: RawArgs): TE.TaskEither<string, string> {
+	return TE.of('hi');
+}
+
+declare function printResult(res: string): IO.IO<void>;
+
+export default function brew(args: RawArgs): void {
+	pipe(
+		RIO.of({ result: 'Result of an action' }),
+		RIO.chainFirst(() => L.info('Some action was performed')),
+		RIO.chainFirst(L.debugP("And here's the details"))
+	)(env)();
+
+	// pipe(
+	// 	args,
+	// 	TE.fromIO(info('started with args')),
+	// 	(s) => s,
+	// 	TE.map((s) => shimBrewOrPassthrough(s)),
+	// 	(s) => s,
+	// 	TE.fold(
+	// 		(e) => {
+	// 			IO.of();
+	// 			error('left')(e);
+	// 			return T.of('hi');
+	// 		},
+	// 		(e) => {
+	// 			error('right')(e);
+	// 			return T.of('hi');
+	// 		}
+	// 	)
+	// )();
+
+	// (intercepts[args[0] ?? ''] ?? noop)(args);
 }
