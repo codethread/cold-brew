@@ -1,59 +1,48 @@
-// tasks
-// 1. get brew commands to pass through
-// 2. get output to display
-// 3. colors and stuff
-// 4. handle input mid command
-// 5. exit codes
-// 6. add custom steps
-// 8. disable auto update things?? on update command, run volta-migrate
-import { SystemClock } from 'clock-ts';
-import * as TE from 'fp-ts/TaskEither';
-import * as RIO from 'fp-ts/ReaderIO';
-import * as IO from 'fp-ts/IO';
-import type * as E from 'fp-ts/Either';
-import * as T from 'fp-ts/Task';
-import { pipe } from 'fp-ts/function';
 import * as C from 'fp-ts/Console';
-import * as L from 'logger-fp-ts';
-
-const env: L.LoggerEnv = {
-	clock: SystemClock,
-	logger: pipe(C.log, L.withShow(L.ShowLogEntry)),
-};
+import * as E from 'fp-ts/Either';
+import * as RT from 'fp-ts/ReaderTask';
+import { pipe } from 'fp-ts/function';
+import * as RIO from 'fp-ts/ReaderIO';
+import * as RTE from 'fp-ts/ReaderTaskEither';
+import * as TE from 'fp-ts/TaskEither';
+import { Command, CommandC } from './schema';
+import { env, Env } from './env';
 
 type RawArgs = readonly string[];
+type CommandHandler = RTE.ReaderTaskEither<Env, Error, 'ok'>;
 
-function shimBrewOrPassthrough(args: RawArgs): TE.TaskEither<string, string> {
-	return TE.of('hi');
-}
+const parseArgs: (args: RawArgs) => E.Either<'ignored command', Command> = (args) =>
+	pipe(
+		CommandC.decode(args[0]),
+		E.mapLeft((_) => 'ignored command')
+	);
 
-declare function printResult(res: string): IO.IO<void>;
+declare const loadUserProfile: RTE.ReaderTaskEither<Env, Error, Profile>;
+
+// const handleInstall: CommandHandler = (env) => pipe(
+// 		RTE.Do,
+// 		RTE.map((s) => console.log('hi', s)),
+// 		RTE.bind('command', () => RTE.fromEither(parseArgs(args))),
+// 		// RTE.bind('profile', () => loadUserProfile),
+//         RTE.chainW((s) => handleCommand(s.command)),
+// 		RTE.fold(
+// 			(s) => RT.of(console.log('yay', s)),
+// 			(s) => RT.of(console.error('oh no', s))
+// 		)
+// )(env)
+
+const handleUninstall: CommandHandler = RTE.of('ok');
+const handleInstall: CommandHandler = RTE.of('ok');
+
+const intercepts: Record<Command, CommandHandler> = {
+	install: handleInstall,
+	uninstall: handleUninstall,
+} as const;
 
 export default function brew(args: RawArgs): void {
 	pipe(
-		RIO.of({ result: 'Result of an action' }),
-		RIO.chainFirst(() => L.info('Some action was performed')),
-		RIO.chainFirst(L.debugP("And here's the details"))
+		RTE.fromEither(parseArgs(args)),
+		RTE.chainW((cmd) => intercepts[cmd]),
+		RTE.match(console.warn, console.log)
 	)(env)();
-
-	// pipe(
-	// 	args,
-	// 	TE.fromIO(info('started with args')),
-	// 	(s) => s,
-	// 	TE.map((s) => shimBrewOrPassthrough(s)),
-	// 	(s) => s,
-	// 	TE.fold(
-	// 		(e) => {
-	// 			IO.of();
-	// 			error('left')(e);
-	// 			return T.of('hi');
-	// 		},
-	// 		(e) => {
-	// 			error('right')(e);
-	// 			return T.of('hi');
-	// 		}
-	// 	)
-	// )();
-
-	// (intercepts[args[0] ?? ''] ?? noop)(args);
 }
