@@ -6,10 +6,10 @@ import * as RIO from 'fp-ts/ReaderIO';
 import * as RTE from 'fp-ts/ReaderTaskEither';
 import * as TE from 'fp-ts/TaskEither';
 import { Command, CommandC } from './schema';
-import { env, Env } from './env';
+import { serviceEnv, ServiceEnv } from './env';
 
 type RawArgs = readonly string[];
-type CommandHandler = RTE.ReaderTaskEither<Env, Error, 'ok'>;
+type CommandHandler = RTE.ReaderTaskEither<ServiceEnv, Error, 'ok'>;
 
 const parseArgs: (args: RawArgs) => E.Either<'ignored command', Command> = (args) =>
 	pipe(
@@ -17,7 +17,7 @@ const parseArgs: (args: RawArgs) => E.Either<'ignored command', Command> = (args
 		E.mapLeft((_) => 'ignored command')
 	);
 
-declare const loadUserProfile: RTE.ReaderTaskEither<Env, Error, Profile>;
+declare const loadUserProfile: RTE.ReaderTaskEither<ServiceEnv, Error, Profile>;
 
 // const handleInstall: CommandHandler = (env) => pipe(
 // 		RTE.Do,
@@ -44,5 +44,5 @@ export default function brew(args: RawArgs): void {
 		RTE.fromEither(parseArgs(args)),
 		RTE.chainW((cmd) => intercepts[cmd]),
 		RTE.match(console.warn, console.log)
-	)(env)();
+	)(serviceEnv)();
 }
