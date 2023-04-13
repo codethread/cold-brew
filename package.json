@@ -4,13 +4,14 @@
 	"license": "MIT",
 	"scripts": {
 		"ts": "tsc",
-		"dev": "node --watch ./cli/bin.js"
+		"dev": "node -r ts-node/register --watch ./cli/dev.ts"
 	},
 	"bin": "./cli/bin.js",
 	"dependencies": {
 		"fp-ts": "^2.13.1",
 		"io-ts": "^2.2.20",
-		"simple-node-logger": "^21.8.12"
+		"simple-node-logger": "^21.8.12",
+		"ts-node": "^10.9.1"
 	},
 	"volta": {
 		"node": "18.12.1"
