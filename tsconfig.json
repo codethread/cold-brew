@@ -7,5 +7,8 @@
 		"importsNotUsedAsValues": "preserve",
 		"allowUnusedLabels": true
 	},
-	"include": ["src/**/*"]
+	"include": ["src/**/*"],
+	"ts-node": {
+		"transpileOnly": true
+	}
 }

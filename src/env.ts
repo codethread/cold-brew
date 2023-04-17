@@ -6,8 +6,8 @@ export const configEnv = {};
 
 export type ConfigEnv = {
 	logLevel: 'info' | 'warn';
-    /** path to user collections, including a valid profile */
+	/** path to user collections, including a valid profile */
 	configPath: string;
-    /** User profile to convert to a brewfile */
+	/** User profile to convert to a brewfile */
 	profile: string;
 };

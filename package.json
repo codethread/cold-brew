@@ -8,10 +8,14 @@
 	},
 	"bin": "./cli/bin.js",
 	"dependencies": {
+		"configstore": "^6.0.0",
 		"fp-ts": "^2.13.1",
+		"inquirer": "^9.1.5",
 		"io-ts": "^2.2.20",
 		"simple-node-logger": "^21.8.12",
-		"ts-node": "^10.9.1"
+		"ts-brand": "^0.0.2",
+		"ts-node": "^10.9.1",
+		"ts-pattern": "^4.2.2"
 	},
 	"volta": {
 		"node": "18.12.1"
@@ -19,7 +23,7 @@
 	"devDependencies": {
 		"@tsconfig/node-lts-strictest": "^18.12.1",
 		"@types/node": "^18.11.10",
-		"prettier": "^2.8.0",
+		"prettier": "^2.8.7",
 		"typescript": "^4.9.3"
 	}
 }
